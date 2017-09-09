@@ -1,101 +1,73 @@
-{# some variables #}
+{% set divisionTotalMembers = division.memberCount + division.partTimeMembers.count() %}
+[CENTER]
+[IMG]http://i.imgur.com/Xb2X4je.png[/IMG]
 
-
-{% set TBA = "[color=orange]TBA[/color]" %}
-[table="width: 800, align: center"][tr][td]
-
-{# division graphic header #}
-[img]http://i.imgur.com/IAdO7MY.png[/img]
-
-[CENTER][SIZE=5][COLOR=#FF0000][B][U]Division Leaders[/U][/B][/COLOR][/SIZE]
-[size=4]
-{# iterate leaders #}
+[SIZE=5][COLOR="#ff6633"][B][U]Division Leadership[/U][/B][/COLOR][/SIZE]
+[SIZE=4]
 	{% for leader in division.leaders %}
-		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }}
+		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }} [url={{ leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
 	{% endfor %}
 [/size]
 
-[size=3][color=#FF8C00][b]General Sergeants[/b][/color]
-{# iterate general sergeants #}
+
+[size=3][color="#ff6633"]General Sergeants[/color]
 	{% for sergeant in division.generalSergeants %}
 		[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
 	{% else %}
 		No general Sergeants assigned
 	{% endfor %}
+[/SIZE]
+[/center]
 
-[/center][/size]
-[/td][/tr][/table]
-
-[table="width: 800, align: center"]
-{# iterate platoons #}
-{% for platoon in division.platoons %}
-	{% if (loop.first) %}
-		[tr][td="width:33%"]
-	{% else %}
-		[td="width:33%"]
-	{% endif %}
-	{# does this platoon have a logo? #}
-	{% if platoon.logo %}
-		[img]{{ platoon.logo }}[/img]
-	{% else %}
-		No platoon logo
-	{% endif %}
-	[color=red][size=5]{{ division.locality.platoon }} #{{ loop.index }}[/size][/color]
-	[size=3][i]{{ platoon.name }}[/i]
+{% for platoon in division.platoons %}	
+[table="align: center"]
+	[tr][td]
 	
-	[color=cyan]{{ division.locality.platoon_leader }}[/color]
+	[center][size=4][color=#ff6633]{{ platoon.name }}[/color][/center]
 	{% if platoon.leader %}
-		[profile={{ platoon.leader.clan_id }}][color=#00FF00]{{ platoon.leader.present().rankName }}[/color][/profile]
+    	[center][profile={{ platoon.leader.clan_id }}][color="#00FF00"]{{ platoon.leader.present().rankName }}[/color][/profile] 
+        {%- if platoon.leader.handle -%} 
+        	[url={{ platoon.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
+		{%- else -%}
+			XX
+		{%- endif -%}
+        [/center]
 	{% else %}
-		{{ TBA }}
-	{% endif %}
-	[/size]
+    	TBA
+   	{% endif %}
+    	[/size]
 	
-	{# iterate squads #}
-	{% for squad in platoon.squads %}
-		[size=3][color=cyan]{{ division.locality.squad_leader }}[/color]
-		{% if squad.leader %}
-			[profile={{ squad.leader.clan_id }}][color=orange]{{ squad.leader.present().rankName }}[/color][/profile]
-		{% else %}
-			{{ TBA }}
-		{% endif %}
-		[/size]
-		
-		{# iterate squad members #}
-		[size=1]
-		{%- for member in squad.members -%}
-			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
-		{% endfor %}
-		[/size]
-	{% endfor %}
+    
+	[/td][/tr]
+[/table]
+   
+[table="align: center"]
+[tr]
+    {% for squad in platoon.squads %}
+    [td]
+    	[size=3][color=#ff6633]{{ squad.name ?: "Squad " + loop.index }}[/color][/size]
+    	{% if squad.leader %}
+        	[size=3][profile={{ squad.leader.clan_id }}][color=white]{{ squad.leader.present().rankName }}[/color][/profile]
+            {%- if squad.leader.handle -%} 
+        		[url={{ squad.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
+			{%- else -%}
+				XX
+			{%- endif -%}
+		{% else %} 
+			{{ TBA }} 
+		{% endif %} 
+		[/size] 
+        [size=2][list=1] 
+ 		{%- for member in squad.members -%} 
+ 			[*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - {{ member.handle ? "[url=" ~ member.handle.full_url ~ "][color=#ff6633][BC][/color][/url]" : "XXX" }}
+ 		{% endfor %} 
+ 		[/list][/size] 
 	[/td]
-	
-	{% if loop.index is divisible by (3) %}
-		[/tr][tr]
+	{% if loop.index is divisible by (2) %}
+	[/tr][tr]
 	{% endif %}
+	{% endfor %} 
+	[/tr]
+	
+[/table]
 {% endfor %}
-[/tr][/table]
-
-
-{# iterate leaves of absence #}
-{% if (division.leave) %}
-	[center][size=3][color=#FF8C00][b]Leaves of Absence[/b][/color][/size]
-	
-	{% for member in division.leave %}
-		{% if member.leave.expired %}
-			{{ member.present().rankName }} - [color=red]{{ member.leave.date }} (EXPIRED)[/color] - {{ member.leave.reason }}
-		{% else %}
-			{{ member.present().rankName }} - {{ member.leave.date }} - {{ member.leave.reason }}
-		{% endif %}
-	{% endfor %}
-	
-	[/center]
-{% endif %}
-
-{# iterate part time members #}
-[center][size=3][color=#FF8C00][b]Part Time Members[/b][/color][/size]
-		[size=1]
-		{%- for member in division.partTimeMembers -%}
-			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
-		{% endfor %}
-		[/size][/center]
