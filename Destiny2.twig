@@ -1,5 +1,5 @@
 [CENTER]
-[IMG]https://i.imgur.com/wXlDBGM.png[/IMG]
+[IMG]https://i.imgur.com/xfypSE2.png[/IMG]
 
 {% set leader_color = "#fff" %}
 {% set platoon_color = "#a4d0ce" %}
@@ -7,7 +7,7 @@
 [SIZE=5][COLOR="{{ leader_color }}"][B][U]Division Leadership[/U][/B][/COLOR][/SIZE]
 [SIZE=4]
 	{% for leader in division.leaders %}
-		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }} {#[url={{ leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]#}
+		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }}
 	{% endfor %}
 [/size]
 
@@ -25,43 +25,37 @@
 [table="align: center"]
 	[tr][td]
 	
-	[center][size=4][color={{ platoon_color }}]{{ platoon.name }}[/color][/center]
+	[center]
+    [img]{{ platoon.logo }}[/img]
+    
+    
+    [size=4][color={{ platoon_color }}]{{ platoon.name }}[/color]
+    
+
 	{% if platoon.leader %}
-    	[center][profile={{ platoon.leader.clan_id }}][color="#00FF00"]{{ platoon.leader.present().rankName }}[/color][/profile] 
-        {#{%- if platoon.leader.handle -%} 
-        	[url={{ platoon.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
-		{%- else -%}
-			XX
-		{%- endif -%}#}
-        [/center]
+    	[profile={{ platoon.leader.clan_id }}][color="#00FF00"]{{ platoon.leader.present().rankName }}[/color][/profile]
 	{% else %}
     	TBA
    	{% endif %}
-    	[/size]
-	
-    
+    [/center]
+    	[/size]    
 	[/td][/tr]
 [/table]
-   
 [table="align: center"]
 [tr]
     {% for squad in platoon.squads %}
     [td]
-    	[size=3][color={{ platoon_color }}]{{ squad.name ?: "Squad " + loop.index }}[/color][/size]
+    	[size=3]
+    	[center][color={{ platoon_color }}]{{ squad.name ?: "Squad " + loop.index }}[/color]
     	{% if squad.leader %}
-        	[size=3][profile={{ squad.leader.clan_id }}][color=white]{{ squad.leader.present().rankName }}[/color][/profile]
-            {#{%- if squad.leader.handle -%} 
-        		[url={{ squad.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
-			{%- else -%}
-				XX
-			{%- endif -%}#}
+			[profile={{ squad.leader.clan_id }}][color=white]{{ squad.leader.present().rankName }}[/color][/profile]
 		{% else %} 
-			{{ TBA }} 
+			TBA 
 		{% endif %} 
-		[/size] 
+        [/center][/size] 
         [size=2][list=1] 
  		{%- for member in squad.members -%} 
- 			[*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - {# {{ member.handle ? "[url=" ~ member.handle.full_url ~ "][color=#ff6633][BC][/color][/url]" : "XXX" }} #}
+ 			[*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
  		{% endfor %} 
  		[/list][/size] 
 	[/td]
