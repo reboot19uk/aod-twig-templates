@@ -1,0 +1,136 @@
+[CENTER]
+{# ARK Survival Evolved header #}
+[img]https://i.imgur.com/SWGUb8b.png[/img]
+{% set leader_color = "#fff" %}
+{% set platoon_color = "#fff" %}
+{% set platoon_lead_color=”#0d0d0d” }
+{% set member_color = "#cc0000" %}
+
+[SIZE=5][COLOR="{{ leader_color }}"][B][U]Division Leadership[/U][/B][/COLOR][/SIZE]
+[SIZE=4]
+	{% for leader in division.leaders %}
+		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }}
+	{% endfor %}
+[/size]
+[size=3][color="#fff"]General Sergeants[/color]
+	{% for sergeant in division.generalSergeants %}
+		[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
+	{% else %}
+		No general Sergeants assigned
+	{% endfor %}
+[/SIZE]
+[/center]	
+
+[table="align: center"]
+              [tr][td]
+	[table="align: center"]
+              	[tr]
+
+{% for platoon in division.platoons %}
+[td]
+	[center]
+	{% if platoon.logo %}
+		[IMG]{{ platoon.logo }}[/IMG][size=4][color=#0d0d0d]_____[/color][/size]
+	{% else %}
+	
+	{% endif %}
+	[color=#00FFFF][size=5]{{ division.locality.platoon }} #{{ loop.index }}[/size][/color][size=4][color={{ platoon_color }}] _____[/color][/size]
+	[size=4]
+	{% if platoon.leader %}
+		[profile={{ platoon.leader.clan_id }}][color={{ leader.rank.color }}]{{ platoon.leader.present().rankName }}[/color][/profile][color=#0d0d0d]_____[/color]
+	{% else %}
+		{{ TBA }} [color=#0d0d0d]_____[/color]
+	{% endif %}
+	[/size][/center]
+	{# iterate squads #}
+	[table="align:center"][tr][td]
+	{% for squad in platoon.squads %}
+		[size=4]
+		{% if squad.leader %}
+			[profile={{ squad.leader.clan_id }}][color=orange]{{ squad.leader.present().rankName }}[/color][/profile]
+		{% else %}
+			{{ TBA }}
+		{% endif %}
+		[/size]
+		
+		{# iterate squad members #}
+		[list=1]
+		{% for member in squad.members %}
+			[*] [profile={{ member.clan_id }}][COLOR="{{ member_color }}"]{{ member.present().rankName }}[/profile][/COLOR]
+    [URL=http://steamcommunity.com/profiles/{{ member.handle.pivot.value|trim }}][COLOR="#666666"] Steam Profile[/COLOR] [/URL]	
+	{% endfor %}
+		[/list]
+		{% if loop.last == false %}
+			[/td][td]
+		{% else %}
+		
+		{% endif %}
+	{% endfor %}
+	[/td][/tr][/table]
+[/td]
+{% endfor %}
+
+
+[/tr][/table]
+
+[/td][/tr]
+
+[tr][td]
+
+
+{# part time members #}
+{% if division.partTimeMembers.count() > 0 %}
+[table='align:center,width: 800']
+	[tr]
+		[td=colspan:4,align:center]
+			[center][size=3][color={{ platoon_color }}] [b]Part Time Members[/b][/color][/size][/center]
+		[/td]
+	[/tr]
+	[tr]
+		{% for partTimer in division.partTimeMembers %}
+		[td]
+			[profile={{ partTimer.clan_id }}][COLOR="{{ member_color }}"]{{ partTimer.present().rankName }}[/COLOR][/profile]
+		[/td]
+		{% if loop.index is divisible by(4) %}
+		[/tr]
+		[tr]
+			{% endif %}
+			{% endfor %}
+		[/tr]
+	[/tr]
+	[/table]
+	{% endif %}
+[/td][/tr]
+[tr][td]
+
+	{# Leaves of Absence #}
+	{% if division.leave.count() > 0 %}
+	[table='align:center,width: 800'] 
+	[tr]
+		[td=colspan:4]
+			[center][size=3][b][color={{ platoon_color }}] Leaves of Absence[/COLOR][/b][/size][/center]
+		[/td]
+	[/tr]
+	{% for member in division.leave %}
+	[tr]
+		[td]
+			[profile={{ member.clan_id }}][COLOR="{{ member_color }}"]{{ member.present().rankName }}[/COLOR][/profile]
+		[/td]
+		{% if member.leave.expired %}
+		[td]
+		[color=red]{{ member.leave.date }} (EXPIRED)[/color]
+		[/td]
+		{% else %}
+			[td]
+				{{ member.leave.date }}
+			[/td]
+		{% endif %}
+		[td]
+			{{ member.leave.reason }}
+		[/td]
+	[/tr]
+	{% endfor %}
+	[/table]
+	{% endif %}
+[/td][/tr]
+[/table]
