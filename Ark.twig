@@ -3,7 +3,7 @@
 [img]https://i.imgur.com/SWGUb8b.png[/img]
 {% set leader_color = "#fff" %}		{# CO and XO Color Heading Color #}
 {% set heading_color = "#fff" %}	{# Heading Color #}
-{% set platoon_lead_color= "#0d0d0d” %}	{# Platoon Leader Color #}
+{% set platoon_color = "#0d0d0d" %}	{# Platoon Leader Color #}
 {% set member_color = "#cc0000" %}	{# Member Color #}
 {% set TBA = "Will be announed soon" %}	{# What is showed when a position is not filled #}
 
@@ -45,7 +45,7 @@
 	[color=#00FFFF][size=5]{{ division.locality.platoon }} #{{ loop.index }}[/size][/color][size=4][color={{ heading_color }}] _____[/color][/size]
 	[size=4]
 	{% if platoon.leader %}
-		[profile={{ platoon.leader.clan_id }}][color={{ leader.rank.color }}]{{ platoon.leader.present().rankName }}[/color][/profile][color=#0d0d0d]_____[/color]
+		[profile={{ platoon.leader.clan_id }}][color={{ platoon.rank.color }}]{{ platoon.leader.present().rankName }}[/color][/profile][color=#0d0d0d]_____[/color]
 	{% else %}
 		{{ TBA }} [color=#0d0d0d]_____[/color]
 	{% endif %}
