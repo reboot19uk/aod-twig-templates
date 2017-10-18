@@ -42,10 +42,10 @@
 	{% endif %}
 
 	{# Display the platoon leader or whatever is in TBA variable if no leader is set #}
-	[color=#00FFFF][size=5]{{ division.locality.platoon }} #{{ loop.index }}[/size][/color][size=4][color={{ platoon_color }}][/color][/size]
+	[color=#00FFFF][size=5]{{ division.locality.platoon }} #{{ loop.index }}[/size][/color][size=4][color={{ heading_color }}][/color][/size]
 	[size=4]
 	{% if platoon.leader %}
-		[profile={{ platoon.leader.clan_id }}][color={{ heading_color }}]{{ platoon.leader.present().rankName }}[/color][/profile]
+		[profile={{ platoon.leader.clan_id }}][color={{ platoon_color }}]{{ platoon.leader.present().rankName }}[/color][/profile]
 	{% else %}
 		{{ TBA }}
 	{% endif %}
