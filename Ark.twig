@@ -47,7 +47,7 @@
 	{% if platoon.leader %}
 		[profile={{ platoon.leader.clan_id }}][color={{ platoon_color }}]{{ platoon.leader.present().rankName }}[/color][/profile]
 	{% else %}
-		{{ TBA }}
+		[color={{ platoon_color }}]{{ TBA }}[/color]
 	{% endif %}
 
 	[/size][/center]
