@@ -1,18 +1,23 @@
 [CENTER]
 {# ARK Survival Evolved header #}
 [img]https://i.imgur.com/SWGUb8b.png[/img]
-{% set leader_color = "#fff" %}
-{% set platoon_color = "#fff" %}
-{% set platoon_lead_color=”#0d0d0d” }
-{% set member_color = "#cc0000" %}
+{% set leader_color = "#fff" %}		{# CO and XO Color Heading Color #}
+{% set heading_color = "#fff" %}	{# Heading Color #}
+{% set platoon_lead_color=”#0d0d0d” %}	{# Platoon Leader Color #}
+{% set member_color = "#cc0000" %}	{# Member Color #}
+{% set TBA = "Will be announed soon" %}	{# What is showed when a position is not filled #}
 
 [SIZE=5][COLOR="{{ leader_color }}"][B][U]Division Leadership[/U][/B][/COLOR][/SIZE]
 [SIZE=4]
+
+	{# Display CO and XO #}
 	{% for leader in division.leaders %}
 		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }}
 	{% endfor %}
 [/size]
 [size=3][color="#fff"]General Sergeants[/color]
+
+	{# Display any General Sergeants listed for the division #}
 	{% for sergeant in division.generalSergeants %}
 		[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
 	{% else %}
@@ -25,27 +30,34 @@
               [tr][td]
 	[table="align: center"]
               	[tr]
-
+{# Iterate Platoons #}
 {% for platoon in division.platoons %}
 [td]
 	[center]
+	{# Displays Platoon Logo if any #}
 	{% if platoon.logo %}
 		[IMG]{{ platoon.logo }}[/IMG][size=4][color=#0d0d0d]_____[/color][/size]
 	{% else %}
 	
 	{% endif %}
-	[color=#00FFFF][size=5]{{ division.locality.platoon }} #{{ loop.index }}[/size][/color][size=4][color={{ platoon_color }}] _____[/color][/size]
+
+	{# Display the platoon leader or whatever is in TBA variable if no leader is set #}
+	[color=#00FFFF][size=5]{{ division.locality.platoon }} #{{ loop.index }}[/size][/color][size=4][color={{ heading_color }}] _____[/color][/size]
 	[size=4]
 	{% if platoon.leader %}
 		[profile={{ platoon.leader.clan_id }}][color={{ leader.rank.color }}]{{ platoon.leader.present().rankName }}[/color][/profile][color=#0d0d0d]_____[/color]
 	{% else %}
 		{{ TBA }} [color=#0d0d0d]_____[/color]
 	{% endif %}
+
 	[/size][/center]
-	{# iterate squads #}
+
+	{# Iterate Squads #}
 	[table="align:center"][tr][td]
 	{% for squad in platoon.squads %}
 		[size=4]
+
+		{# Display the squad leader or whatever is in TBA variable if no leader is set #}
 		{% if squad.leader %}
 			[profile={{ squad.leader.clan_id }}][color=orange]{{ squad.leader.present().rankName }}[/color][/profile]
 		{% else %}
@@ -53,11 +65,13 @@
 		{% endif %}
 		[/size]
 		
-		{# iterate squad members #}
+		{# Iterate Squad Members #}
 		[list=1]
 		{% for member in squad.members %}
 			[*] [profile={{ member.clan_id }}][COLOR="{{ member_color }}"]{{ member.present().rankName }}[/profile][/COLOR]
-    [URL=http://steamcommunity.com/profiles/{{ member.handle.pivot.value|trim }}][COLOR="#666666"] Steam Profile[/COLOR] [/URL]	
+
+			{# Display the Steam Profile Link #}
+			[URL=http://steamcommunity.com/profiles/{{ member.handle.pivot.value|trim }}][COLOR="#666666"] Steam Profile[/COLOR] [/URL]	
 	{% endfor %}
 		[/list]
 		{% if loop.last == false %}
@@ -78,15 +92,17 @@
 [tr][td]
 
 
-{# part time members #}
+{# Display Part Time Members #}
 {% if division.partTimeMembers.count() > 0 %}
 [table='align:center,width: 800']
 	[tr]
 		[td=colspan:4,align:center]
-			[center][size=3][color={{ platoon_color }}] [b]Part Time Members[/b][/color][/size][/center]
+			[center][size=3][color={{ heading_color }}] [b]Part Time Members[/b][/color][/size][/center]
 		[/td]
 	[/tr]
 	[tr]
+
+		{# Iterate Part Time Members #}
 		{% for partTimer in division.partTimeMembers %}
 		[td]
 			[profile={{ partTimer.clan_id }}][COLOR="{{ member_color }}"]{{ partTimer.present().rankName }}[/COLOR][/profile]
@@ -103,14 +119,16 @@
 [/td][/tr]
 [tr][td]
 
-	{# Leaves of Absence #}
-	{% if division.leave.count() > 0 %}
-	[table='align:center,width: 800'] 
+
+{# Leaves of Absence #}
+{% if division.leave.count() > 0 %}
+[table='align:center,width: 800'] 
 	[tr]
 		[td=colspan:4]
-			[center][size=3][b][color={{ platoon_color }}] Leaves of Absence[/COLOR][/b][/size][/center]
+			[center][size=3][b][color={{ heading_color }}] Leaves of Absence[/COLOR][/b][/size][/center]
 		[/td]
 	[/tr]
+	{# Iterate Members on Leave #}
 	{% for member in division.leave %}
 	[tr]
 		[td]
