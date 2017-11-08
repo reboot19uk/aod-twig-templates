@@ -27,13 +27,15 @@
 [/td][/tr][/table]
 
 [table="width: 800, align: center"]
-[tr][td=colspan:2][/tr]
+[tr][td=colspan:2, width:70%][CENTER][color=red][size=5]Group Leader[/size][/color]
+[color=green][size=5]Sgt Apache45[/size][/color][/CENTER][/td]
+[td=colspan:2][CENTER][color=red][size=5]Group Leader[/size][/color][/CENTER][/td][/tr]
 {# iterate platoons #}
 {% for platoon in division.platoons %}
 	{% if (loop.first) %}
-		[tr][td="width:33%"]
+		[tr][td="width:25%"]
 	{% else %}
-		[td="width:33%"]
+		[td="width:25%"]
 	{% endif %}
 	{# does this platoon have a logo? #}
 	{% if platoon.logo %}
@@ -63,17 +65,13 @@
 		[/size]
 		
 		{# iterate squad members #}
-		[size=1][list=1]
+		[size=1]
 		{%- for member in squad.members -%}
-			[*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
+			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
 		{% endfor %}
-		[/list][/size]
+		[/size]
 	{% endfor %}
 	[/td]
-	
-	{% if loop.index is divisible by (3) %}
-		[/tr][tr]
-	{% endif %}
 {% endfor %}
 [/tr][/table]
 
