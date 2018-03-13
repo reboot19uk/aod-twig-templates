@@ -1,0 +1,97 @@
+{# some variables #}
+
+
+{% set TBA = "[color=#FFFFFF]TBA[/color]" %}
+[table="width: 800, align: center"][tr][td]
+
+{# division graphic header #}
+[center][img]https://i.imgur.com/vNkddNi.png[/img]
+[size=4]
+{# iterate leaders #}
+	{% for leader in division.leaders %}
+		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - [COLOR=#FFFFFF]{{ leader.position.name }}[/COLOR]
+	{% endfor %}
+[/size]
+{# iterate general sergeants #}
+```
+[size=3][color=#FFD700]General Sergeants[/color]
+{% for sergeant in division.generalSergeants %}
+	[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
+{% else %}
+
+{% endfor %}
+[/size]
+```
+[/center]
+[/td][/tr][/table]
+
+[table="width: 800, align: center"][tr]
+{# iterate platoons #}
+{% for platoon in division.platoons %}
+	{% if (loop.first) %}
+		[tr][td="width:25%"]
+	{% else %}
+		[td="width:25%"]
+	{% endif %}
+	{# does this platoon have a logo? #}
+	{% if platoon.logo %}
+		[img]{{ platoon.logo }}[/img]
+	{% else %}
+		Logo coming soon
+	{% endif %}
+   [size=3][color=#FFD700]{{ platoon.name }}[/Color][/size]
+    
+    [size=3][color=DAA520]Quartermaster[/color][/size]
+    {% if platoon.leader %}
+        [size=2][profile={{ platoon.leader.clan_id }}] {{ platoon.leader.present().rankName }}  [/profile][/size]
+    
+    {% else %} {# no platoon leader #}
+        {{ TBA }}
+    {% endif %}
+```
+	
+	{# iterate squads #}
+	{% for squad in platoon.squads %}
+           [size=3][color=#DAA520]Bosun[/color][/size]
+		{% if squad.leader %}
+			[size=2][profile={{ squad.leader.clan_id }}] {{ squad.leader.present().rankName }}  [/profile][/size]
+		
+		{% else %} {# no squad leader #}
+			TBA
+		{% endif %}
+```
+		
+		{# iterate squad members #}
+		[size=1]
+		{%- for member in squad.members -%}
+			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
+		{% endfor %}
+		[/size]
+	{% endfor %}
+	[/td]
+{% endfor %}
+[/tr][/table]
+
+
+{# iterate leaves of absence #}
+[center][size=3][color="#FFD700"][b]Leaves of Absence[/b][/color][/size]
+	[color=#FFFFFF][size=1]{% for member in division.leave %}
+		{% if member.leave.expired %}
+			{{ member.present().rankName }} - [color=red]{{ member.leave.date }} (EXPIRED)[/color] - {{ member.leave.reason }}
+		{% else %}
+			{{ member.present().rankName }} - {{ member.leave.date }} - {{ member.leave.reason }}
+		{% endif %}
+	{% endfor %}
+	[/size][/color]
+	[/center]
+    
+{# iterate part time members #}
+[center][size=3][color="#FFD700"][b]Part Time Members[/b][/color][/size]
+[spoiler]
+		[size=1]
+		{%- for member in division.partTimeMembers -%}
+			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
+		{% endfor %}
+		[/size]
+[/spoiler]
+[/center]
