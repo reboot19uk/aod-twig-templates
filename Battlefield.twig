@@ -45,7 +45,7 @@
 [tr]
     {% for squad in platoon.squads %}
     [td]
-    	[size=3][color=#ff6633]{{ squad.name ?: "Squad " + loop.index }}[/color][/size]
+    	[size=3][color=#ff6633]{{ squad.name }}[/color][/size]
     	{% if squad.leader %}
         	[size=3][profile={{ squad.leader.clan_id }}][color=white]{{ squad.leader.present().rankName }}[/color][/profile]
             {%- if squad.leader.handle -%} 
