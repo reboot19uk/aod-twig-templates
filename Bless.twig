@@ -56,25 +56,6 @@
 	{% endfor -%}
 {%- endfor -%}[/size]
 
-[size=3][color="#40E0D0"]Trainers[/color]
-
-{% for platoon in division.platoons %}
-	{%- if platoon.leader -%}
-    	{%- if platoon.leader.rank.name == 'Trainer' %}
-			[profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
-		{% endif %}
-	{% endif -%}	
-    {%- for squad in platoon.squads %}
-		{% if squad.leader.rank.name == 'Trainer' %}
-        	[profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
-        {% endif -%}     
-        {%- for member in squad.members %}
-        	{% if member.rank.name == 'Trainer' %}
-        		[profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
-        	{% endif -%}
-        {% endfor -%}
-	{% endfor -%}
-{%- endfor -%}[/size]
 
 [size=3][color="#40E0D0"]Specialists[/color]
 
@@ -97,6 +78,26 @@
 {%- endfor -%}[/size]
 [/center][/td][/tr][/table]
 
+[Center][size=3][color="#40E0D0"]Trainers[/color]
+
+{% for platoon in division.platoons %}
+	{%- if platoon.leader -%}
+    	{%- if platoon.leader.rank.name == 'Trainer' %}
+			[profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
+		{% endif %}
+	{% endif -%}	
+    {%- for squad in platoon.squads %}
+		{% if squad.leader.rank.name == 'Trainer' %}
+        	[profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
+        {% endif -%}     
+        {%- for member in squad.members %}
+        	{% if member.rank.name == 'Trainer' %}
+        		[profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
+        	{% endif -%}
+        {% endfor -%}
+	{% endfor -%}
+{%- endfor -%}[/size][/Center]
+
 
 [center]
 {% for platoon in division.platoons %}
@@ -117,6 +118,11 @@
     [table="align: center"][tr]
     {% for squad in platoon.squads %}
 		[td]
+        {% if squad.name %}
+        	[size=3][color=#FF0000]{{ squad.name }}[/Color][/size]
+{% else %}
+    		[size=3]Untitled[/size]
+{% endif %}
 		[size=4][color="#40E0D0"]{{ ordSuffix(loop.index) }} Squad Leader[/color]    
     	{% if squad.leader %}
         	[profile={{ squad.leader.clan_id }}]{{ squad.leader.present().rankName }}[/profile]
