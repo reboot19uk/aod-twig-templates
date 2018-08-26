@@ -10,6 +10,7 @@
 
 [size=3][color=#FF0000]General Sergeants[/color]
 	[profile=27004][color=#ff9933]MSgt 31drew31[/color][/profile] - [color="#00B4FF"]AOD31drew31#1987[/color]
+    [profile=42444][color=#00FF00]Sgt Poyzun[/color][/profile] - [color="#00B4FF"]Poyzun#1690[/color]
 [/size][/center][/td][/tr][/table]
 
 [HR][/HR]
@@ -20,7 +21,7 @@
 [table='align:center,width: 1000']
 
 {# iterate platoons #}
-{% for platoon in division.platoons|slice(0, 3) %} {# Iterates Platoons in Company 1 (First 3) #}
+{% for platoon in division.platoons|slice(0, 2) %} {# Iterates Platoons in Company 1 (First 3) #}
 	{% if (loop.first) %}
 		[tr][td]
 	{% else %}
@@ -101,7 +102,7 @@
 
 [table='align:center,width: 800']
 [tr][td]
-{% for platoon in division.platoons|slice(3, 2) %} {# Iterates Platoons in Company 2 (4th and 5th) #}
+{% for platoon in division.platoons|slice(2, 2) %} {# Iterates Platoons in Company 2 (4th and 5th) #}
 	[/td][td]
 	[size=4][color=#FF0000]{{ platoon.name }}[/Color][/size]
 	
@@ -179,14 +180,13 @@
     
 [profile=4437][COLOR="#00FF00"]Sgt Kenshin[/COLOR][/profile]
 
-[SIZE=4][COLOR="#40E0D0"]Coaches[/COLOR][/SIZE]
-
+[SIZE=4][COLOR="#40E0D0"]Coach[/COLOR][/SIZE]
 
 [profile=32145][COLOR="#FFA500"]Spec Daerthanwarp[/COLOR][/profile]
 [/td]
 	[td][COLOR="#40E0D0"][SIZE=4]Roster[/SIZE][/COLOR]
     
-[profile=54175]Cpl Adee[/profile]
+[profile=54175]Spec Adee[/profile]
 [profile=52270]Spec DTFxTheta[/profile]
 [profile=34767]Pfc Daylil[/profile]
 [profile=51046]Pfc Fatalferret[/profile]
