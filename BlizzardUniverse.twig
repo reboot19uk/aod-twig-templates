@@ -31,40 +31,38 @@
 	
 	[size=3][color=#40E0D0]Platoon Leader[/color][/size]
 	{% if platoon.leader %}
-		[size=3][profile={{ platoon.leader.clan_id }}][color=#00FF00] {{ platoon.leader.present().rankName }}  [/color][/profile] - 
+		[size=3][profile={{ platoon.leader.clan_id }}][color=#00FF00] {{ platoon.leader.present().rankName }}  [/color][/profile]  
 			{%- if platoon.leader.handle -%}
-				[color="#00B4FF"]{{ platoon.leader.handle.pivot.value }}[/color]
+				- [color="#00B4FF"]{{ platoon.leader.handle.pivot.value }}[/color]
 			{% else -%}
-				[color="#00B4FF"]N/A[/color]
+				[color="#00B4FF"]TBD[/color]
 			{%- endif -%}[/size]
-	
 	{% else %} {# no platoon leader #}
-		[color=#40E0D0]{{ TBA }}[/color]
+		[color=#40E0D0]{{ TBD }}[/color]
 	{% endif %}
 	{# iterate squad #}
     {% for squad in platoon.squads %}
-
 {% if squad.name %}
         	[size=3][color=#FF0000]{{ squad.name }}[/Color][/size]
 {% else %}
     		[size=3]Untitled[/size]
 {% endif %}
-			
             [size=3][color=#40E0D0]Squad Leader[/color][/size]
 		{% if squad.leader %}
-			[size=3][profile={{ squad.leader.clan_id }}][color=#FFA500] {{ squad.leader.present().rankName }}  [/color][/profile] - 
+			[size=3][profile={{ squad.leader.clan_id }}][color=#FFA500] {{ squad.leader.present().rankName }}  [/color][/profile]  
 			{%- if squad.leader.handle -%}
-				[color="#00B4FF"]{{ squad.leader.handle.pivot.value }}[/color]
+				- [color="#00B4FF"]{{ squad.leader.handle.pivot.value }}[/color]
 			{% else -%}
-				[color="#00B4FF"]N/A[/color]
+				[color="#FFA500"]TBD
+                [/color]
+                
 			{%- endif -%}[/size]
-		
 		{% else %} {# no squad leader #}
-			[color=#FFA500]TBA[/COLOR]
+			[color=#FFA500]{{ TBD }}
+            [/COLOR]
 		{% endif %}
-        
 {# iterate direct squad members #}
-[size=1][list=1]
+[size=1][list]
 {% for member in squad.members %}
             {% if member.recruiter_id == squad.leader.clan_id %}
                 [*][profile={{ member.clan_id }}] {{ member.present().rankName }}[/profile] - 
@@ -75,11 +73,11 @@
 			{% endif %}
              {% endif %}
          {% endfor %}
-[/list][/size]
-[size=1]
+[/size][/list]
+[size=1][list]
 {% for member in squad.members %}
             {% if member.recruiter_id != squad.leader.clan_id or member.recruiter_id == null %}
-                [profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - 
+                [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - 
 			{%- if member.handle -%}
 				[color="#00B4FF"]{{ member.handle.pivot.value }}[/color]
 			{% else %}
@@ -87,7 +85,7 @@
 			{% endif %}
 			{% endif %}
 		{% endfor %}
-[/size]
+[/size][/list]
 {% endfor %} {# end squad iteration #}
 {% endfor %} {# end platoon iteration #}
 [/td][/tr]
@@ -96,51 +94,49 @@
 [HR][/HR]
 
 [CENTER][SIZE=4][COLOR="#FF0000"]Company Leader[/COLOR][/SIZE]
-[SIZE=4][COLOR="#00FF00"]Sgt MJWitz[/COLOR] - [color="#00B4FF"]MJWitz#1251[/color][/SIZE][/CENTER]
+[SIZE=4][COLOR="#00FF00"]Sgt Mjwitz[/COLOR] - [color="#00B4FF"]Mjwitz#1251[/color][/SIZE][/CENTER]
 
 
 [table='align:center,width: 700']
 [tr][td]
-{% for platoon in division.platoons|slice(2, 2) %} {# Iterates Platoons in Company 2 (4th and 5th) #}
+{% for platoon in division.platoons|slice(2, 2) %} {# Iterates Platoons in Company 2 (3rd and 4th) #}
 	[/td][td]
 	[size=4][color=#FF0000]{{ platoon.name }}[/Color][/size]
 	
 	[size=3][color=#40E0D0]Platoon Leader[/color][/size]
 	{% if platoon.leader %}
-		[size=3][profile={{ platoon.leader.clan_id }}][color=#00FF00] {{ platoon.leader.present().rankName }}  [/color][/profile] - 
+		[size=3][profile={{ platoon.leader.clan_id }}][color=#00FF00] {{ platoon.leader.present().rankName }}  [/color][/profile]  
 			{%- if platoon.leader.handle -%}
-				[color="#00B4FF"]{{ platoon.leader.handle.pivot.value }}[/color]
+				- [color="#00B4FF"]{{ platoon.leader.handle.pivot.value }}[/color]
 			{% else -%}
-				[color="#00B4FF"]N/A[/color]
+				[color="#00B4FF"]TBD[/color]
 			{%- endif -%}[/size]
-	
 	{% else %} {# no platoon leader #}
-		[color=#40E0D0]{{ TBA }}[/color]
+		[color=#40E0D0]{{ TBD }}[/color]
 	{% endif %}
 	{# iterate squad #}
     {% for squad in platoon.squads %}
-
 {% if squad.name %}
         	[size=3][color=#FF0000]{{ squad.name }}[/Color][/size]
 {% else %}
     		[size=3]Untitled[/size]
 {% endif %}
-			
             [size=3][color=#40E0D0]Squad Leader[/color][/size]
 		{% if squad.leader %}
-			[size=3][profile={{ squad.leader.clan_id }}][color=#FFA500] {{ squad.leader.present().rankName }}  [/color][/profile] - 
+			[size=3][profile={{ squad.leader.clan_id }}][color=#FFA500] {{ squad.leader.present().rankName }}  [/color][/profile]  
 			{%- if squad.leader.handle -%}
-				[color="#00B4FF"]{{ squad.leader.handle.pivot.value }}[/color]
+				- [color="#00B4FF"]{{ squad.leader.handle.pivot.value }}[/color]
 			{% else -%}
-				[color="#00B4FF"]N/A[/color]
+				[color="#FFA500"]TBD
+                [/color]
+                
 			{%- endif -%}[/size]
-		
 		{% else %} {# no squad leader #}
-			[color=#FFA500]TBA[/COLOR]
+			[color=#FFA500]{{ TBD }}
+            [/COLOR]
 		{% endif %}
-        
 {# iterate direct squad members #}
-[size=1][list=1]
+[size=1][list]
 {% for member in squad.members %}
             {% if member.recruiter_id == squad.leader.clan_id %}
                 [*][profile={{ member.clan_id }}] {{ member.present().rankName }}[/profile] - 
@@ -151,11 +147,11 @@
 			{% endif %}
              {% endif %}
          {% endfor %}
-[/list][/size]
-[size=1]
+[/size][/list]
+[size=1][list]
 {% for member in squad.members %}
             {% if member.recruiter_id != squad.leader.clan_id or member.recruiter_id == null %}
-                [profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - 
+                [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - 
 			{%- if member.handle -%}
 				[color="#00B4FF"]{{ member.handle.pivot.value }}[/color]
 			{% else %}
@@ -163,7 +159,7 @@
 			{% endif %}
 			{% endif %}
 		{% endfor %}
-[/size]
+[/size][/list]
 {% endfor %} {# end squad iteration #}
 {% endfor %} {# end platoon iteration #}
 [/td][/tr]
