@@ -8,19 +8,26 @@
 	{% endfor %}
 [/size]
 
-[size=3][color=#FF0000]General Sergeants[/color]
+[size=4][color=#FF0000]General Sergeants[/color]
 	[profile=27004][color=#ff9933]MSgt 31drew31[/color][/profile] - [color="#00B4FF"]AOD31drew31#1987[/color]
 [/size][/center][/td][/tr][/table]
 
 [HR][/HR]
 
-[CENTER][SIZE=4][COLOR="#FF0000"]Company Leader[/COLOR][/SIZE]
-[SIZE=4][COLOR="#00FF00"]Sgt Kenshin[/COLOR] - [color="#00B4FF"]Kenshin#12319[/color][/SIZE][/CENTER]
-
-[table='align:center,width: 700']
+[table="width: 1300, align: center"]
+[tr]
+	[td][CENTER][SIZE=4][COLOR="#FF0000"]Company Leader[/COLOR][/SIZE][/CENTER][/td]
+	[td][CENTER][SIZE=4][COLOR="#FF0000"]Company Leader[/COLOR][/SIZE][/CENTER][/td]
+[/tr]
+[tr]
+	[td][CENTER][SIZE=4][COLOR="#00FF00"]Sgt Kenshin[/COLOR] - [color="#00B4FF"]Kenshin#12319[/color][/SIZE][/CENTER][/td]
+	[td][CENTER][SIZE=4][COLOR="#00FF00"]Sgt Mjwitz[/COLOR] - [color="#00B4FF"]Mjwitz#1251[/color][/SIZE][/CENTER][/td]
+[/tr]
+[/table]
+[table='align:center,width: 1300']
 
 {# iterate platoons #}
-{% for platoon in division.platoons|slice(0, 2) %} {# Iterates Platoons in Company 1 (First 3) #}
+{% for platoon in division.platoons %} {# Iterates Platoons in Company 1 (First 3) #}
 	{% if (loop.first) %}
 		[tr][td]
 	{% else %}
@@ -92,106 +99,6 @@
 [/table]
 
 [HR][/HR]
-
-[CENTER][SIZE=4][COLOR="#FF0000"]Company Leader[/COLOR][/SIZE]
-[SIZE=4][COLOR="#00FF00"]Sgt Mjwitz[/COLOR] - [color="#00B4FF"]Mjwitz#1251[/color][/SIZE][/CENTER]
-
-
-[table='align:center,width: 700']
-[tr][td]
-{% for platoon in division.platoons|slice(2, 2) %} {# Iterates Platoons in Company 2 (3rd and 4th) #}
-	[/td][td]
-	[size=4][color=#FF0000]{{ platoon.name }}[/Color][/size]
-	
-	[size=3][color=#40E0D0]Platoon Leader[/color][/size]
-	{% if platoon.leader %}
-		[size=3][profile={{ platoon.leader.clan_id }}][color=#00FF00] {{ platoon.leader.present().rankName }}  [/color][/profile]  
-			{%- if platoon.leader.handle -%}
-				- [color="#00B4FF"]{{ platoon.leader.handle.pivot.value }}[/color]
-			{% else -%}
-				[color="#00B4FF"]TBD[/color]
-			{%- endif -%}[/size]
-	{% else %} {# no platoon leader #}
-		[color=#40E0D0]{{ TBD }}[/color]
-	{% endif %}
-	{# iterate squad #}
-    {% for squad in platoon.squads %}
-{% if squad.name %}
-        	[size=3][color=#FF0000]{{ squad.name }}[/Color][/size]
-{% else %}
-    		[size=3]Untitled[/size]
-{% endif %}
-            [size=3][color=#40E0D0]Squad Leader[/color][/size]
-		{% if squad.leader %}
-			[size=3][profile={{ squad.leader.clan_id }}][color=#FFA500] {{ squad.leader.present().rankName }}  [/color][/profile]  
-			{%- if squad.leader.handle -%}
-				- [color="#00B4FF"]{{ squad.leader.handle.pivot.value }}[/color]
-			{% else -%}
-				[color="#FFA500"]TBD
-                [/color]
-                
-			{%- endif -%}[/size]
-		{% else %} {# no squad leader #}
-			[color=#FFA500]{{ TBD }}
-            [/COLOR]
-		{% endif %}
-{# iterate direct squad members #}
-[size=1][list]
-{% for member in squad.members %}
-            {% if member.recruiter_id == squad.leader.clan_id %}
-                [*][profile={{ member.clan_id }}] {{ member.present().rankName }}[/profile] - 
-			{%- if member.handle -%}
-				[color="#00B4FF"]{{ member.handle.pivot.value }}[/color]
-			{% else %}
-				[color="#00B4FF"]N/A[/color]
-			{% endif %}
-             {% endif %}
-         {% endfor %}
-[/size][/list]
-[size=1][list]
-{% for member in squad.members %}
-            {% if member.recruiter_id != squad.leader.clan_id or member.recruiter_id == null %}
-                [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - 
-			{%- if member.handle -%}
-				[color="#00B4FF"]{{ member.handle.pivot.value }}[/color]
-			{% else %}
-				[color="#00B4FF"]N/A[/color]
-			{% endif %}
-			{% endif %}
-		{% endfor %}
-[/size][/list]
-{% endfor %} {# end squad iteration #}
-{% endfor %} {# end platoon iteration #}
-[/td][/tr]
-[/table]
-
-[HR][/HR]
-
-{#[URL="https://blizzard.clanaod.net/forums/forumdisplay.php?f=663"][CENTER][img]https://i.imgur.com/ImLF81Q.png[/img][/CENTER][/URL]
-
-[table="width: 300, align: center"]
-[tr]
-	[td][COLOR="#40E0D0"][SIZE=4]Leadership[/SIZE][/COLOR]
-    
-[profile=4437][COLOR="#00FF00"]Sgt Kenshin[/COLOR][/profile]
-
-[SIZE=4][COLOR="#40E0D0"]Coach[/COLOR][/SIZE]
-
-[profile=32145][COLOR="#FFA500"]Spec Daerthanwarp[/COLOR][/profile]
-[/td]
-	[td][COLOR="#40E0D0"][SIZE=4]Roster[/SIZE][/COLOR]
-    
-[profile=54175]Spec Adee[/profile]
-[profile=34767]Pfc Daylil[/profile]
-[profile=51046]Pfc Fatalferret[/profile]
-[profile=26302]Pfc LuckyGuns[/profile]
-[profile=47578]Pvt AxisSoul[/profile]
-[profile=53317]Pvt H27[/profile]
-[/td]
-[/tr]
-[/table] 
-
-[HR][/HR] #}
 
 {% if division.partTimeMembers.count() > 0 %}
 [table='align:center,width: 800'][tr][td]
