@@ -1,5 +1,4 @@
 -- Imports as of 12/31/2018
--- Imports as of 12/31/2018
 UPDATE members SET last_promoted_at = '2017-01-20', last_trained_at = '2017-01-20', last_trained_by = 00027004, 'xo_at' = '0000-00-00', 'co_at' = '2018-03-17' WHERE clan_id = 38288;
 UPDATE members SET last_promoted_at = '2017-06-17', last_trained_at = '2017-06-22', last_trained_by = 00031832, 'xo_at' = '2018-03-17', 'co_at' = '0000-00-00' WHERE clan_id = 22160;
 UPDATE members SET last_promoted_at = '2018-01-27', last_trained_at = '01/27/2018', last_trained_by = 00008005, 'xo_at' = '2018-03-17', 'co_at' = '0000-00-00' WHERE clan_id = 50789;
