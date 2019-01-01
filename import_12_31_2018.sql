@@ -1,7 +1,7 @@
 -- Imports as of 12/31/2018
 UPDATE members SET last_promoted_at = '2017-01-20', last_trained_at = '2017-01-20', last_trained_by = 27004, 'xo_at' = '0000-00-00', 'co_at' = '2018-03-17' WHERE clan_id = 38288;
 UPDATE members SET last_promoted_at = '2017-06-17', last_trained_at = '2017-06-22', last_trained_by = 31832, 'xo_at' = '2018-03-17', 'co_at' = '0000-00-00' WHERE clan_id = 22160;
-UPDATE members SET last_promoted_at = '2018-01-27', last_trained_at = '01/27/2018', last_trained_by = 8005, 'xo_at' = '2018-03-17', 'co_at' = '0000-00-00'	 WHERE clan_id = 50789;
+UPDATE members SET last_promoted_at = '2018-01-27', last_trained_at = '01/27/2018', last_trained_by = 8005, 'xo_at' = '2018-03-17', 'co_at' = '0000-00-00' WHERE clan_id = 50789;
 UPDATE members SET last_promoted_at = '2015-05-19', last_trained_at = '0000-00-00', last_trained_by = 0, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 3438;
 UPDATE members SET last_promoted_at = '2015-09-05', last_trained_at = '2015-09-05', last_trained_by = 3419, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 3469;
 UPDATE members SET last_promoted_at = '2016-04-11', last_trained_at = '04/11/2016', last_trained_by = 3438, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 27343;
@@ -55,14 +55,14 @@ UPDATE members SET last_promoted_at = '0000-00-00', last_trained_at = '0000-00-0
 UPDATE members SET last_promoted_at = '2017-06-17', last_trained_at = '2017-06-17', last_trained_by = 3438, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 10264;
 UPDATE members SET last_promoted_at = '2017-06-17', last_trained_at = '2017-06-17', last_trained_by = 3438, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00'	 WHERE clan_id = 31832;
 UPDATE members SET last_promoted_at = '2018-04-14', last_trained_at = '2018-04-14', last_trained_by = 22160, 'xo_at' = '0000-00-00', 'co_at' = '2018-11-11' WHERE clan_id = 49352;
-UPDATE members SET last_promoted_at = '2018-15-05', last_trained_at = '2018-12-05', last_trained_by = 8897, 'xo_at' = '2018-11-11'  'co_at' =WHERE clan_id = 59892;
+UPDATE members SET last_promoted_at = '2018-15-05', last_trained_at = '2018-12-05', last_trained_by = 8897, 'xo_at' = '2018-11-11', 'co_at' = '0000-00-00' WHERE clan_id = 59892;
 UPDATE members SET last_promoted_at = '2018-07-05', last_trained_at = '2018-07-05', last_trained_by = 8897, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 41711;
 UPDATE members SET last_promoted_at = '2017-11-18', last_trained_at = '2017-11-18', last_trained_by = 12543, 'xo_at' = '2018-01-13', 'co_at' = '0000-00-00' WHERE clan_id = 51864;
 UPDATE members SET last_promoted_at = '2018-02-10', last_trained_at = '2018-02-10', last_trained_by = 22160, 'xo_at' = '2018-02-10', 'co_at' = '0000-00-00' WHERE clan_id = 32509;
 UPDATE members SET last_promoted_at = '2014-09-20', last_trained_at = '2014-09-20', last_trained_by = 20755, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 20773;
-UPDATE members SET last_promoted_at = '2017-07-02', last_trained_at = '2017-07-02', last_trained_by = 20755  'xo_at' =WHERE clan_id  'co_at' == 39654;
-UPDATE members SET last_promoted_at = '2016-08-11', last_trained_at = '2016-08-11', last_trained_by = 31832  'xo_at' =WHERE clan_id  'co_at' == 39653;
-UPDATE members SET last_promoted_at = '2018-02-25', last_trained_at = '2018-02-25', last_trained_by = 43205  'xo_at' =WHERE clan_id  'co_at' == 42762;
+UPDATE members SET last_promoted_at = '2017-07-02', last_trained_at = '2017-07-02', last_trained_by = 20755  'xo_at' ='0000-00-00', 'co_at' = '0000-00-00' WHERE WHERE clan_id = 39654;
+UPDATE members SET last_promoted_at = '2016-08-11', last_trained_at = '2016-08-11', last_trained_by = 31832  'xo_at' ='0000-00-00', 'co_at' = '0000-00-00' WHERE WHERE clan_id = 39653;
+UPDATE members SET last_promoted_at = '2018-02-25', last_trained_at = '2018-02-25', last_trained_by = 43205  'xo_at' ='0000-00-00', 'co_at' = '0000-00-00' WHERE WHERE clan_id = 42762;
 UPDATE members SET last_promoted_at = '2017-06-17', last_trained_at = '2017-06-19', last_trained_by = 10264, 'xo_at' = '0000-00-00', 'co_at' = '2016-10-02' WHERE clan_id = 12543;
 UPDATE members SET last_promoted_at = '2017-06-23', last_trained_at = '2017-06-23', last_trained_by = 27004, 'xo_at' = '2017-10-18', 'co_at' = '0000-00-00' WHERE clan_id = 40557;
 UPDATE members SET last_promoted_at = '2015-02-21', last_trained_at = '0000-00-00', last_trained_by = 0, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00'	 WHERE clan_id = 8162;
@@ -78,6 +78,6 @@ UPDATE members SET last_promoted_at = '2018-03-08', last_trained_at = '2018-04-0
 UPDATE members SET last_promoted_at = '0000-00-00', last_trained_at = '0000-00-00', last_trained_by = 0, 'xo_at' = '2018-08-06', 'co_at' = '0000-00-00' WHERE clan_id = 32492;
 UPDATE members SET last_promoted_at = '0000-00-00', last_trained_at = '0000-00-00', last_trained_by = 0, 'xo_at' = '2018-09-01', 'co_at' = '0000-00-00' WHERE clan_id = 31564;
 UPDATE members SET last_promoted_at = '2018-01-27', last_trained_at = '0000-00-00', last_trained_by = 0, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 3563;
-UPDATE members SET last_promoted_at = '2016-01-29', last_trained_at = '2018-01-29', last_trained_by = 0, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00', '0000-00-00' WHERE clan_id = 14378;
+UPDATE members SET last_promoted_at = '2016-01-29', last_trained_at = '2018-01-29', last_trained_by = 0, 'xo_at' = '0000-00-00', 'co_at' = '0000-00-00' WHERE clan_id = 14378;
 UPDATE members SET last_promoted_at = '2018-02-24', last_trained_at = '2015-10-09', last_trained_by = 8162, 'xo_at' = '0000-00-00', 'co_at' = '2017-12-25' WHERE clan_id = 33860;
 UPDATE members SET last_promoted_at = '2017-02-08', last_trained_at = '2016-02-08', last_trained_by = 27343, 'xo_at' = '2018-11-14', 'co_at' = '0000-00-00' WHERE clan_id = 38820;
