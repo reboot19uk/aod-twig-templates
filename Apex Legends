@@ -1,0 +1,148 @@
+{# Division Structure 13/02/2019 #}
+
+{# As always, if you need to edit this, please save this code as a text document and edit a fresh copy in a code editor, such as Notepad++ #}
+{# Please put comments to anything you change, it makes everybodys life easier #}
+
+{% set TBA = "[color=#40E0D0]TBA[/color]" %}
+{% set max_platoons = 5 %}
+[Center][img]https://i.imgur.com/uSIzeyy.png[/img][/Center]
+
+[center][size=4][color=#FF0000]Division Leaders[/color]
+[/size]																				{# Notes Division Leaders, CO and XO's #}
+[size=4]{% for leader in division.leaders %}
+	[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }}
+	{% endfor %}
+[/size][/center]
+[center][size=4][color=#FF0000]General Sergeants[/color]
+[/size]
+[size=4]{% for sergeant in division.generalSergeants %}
+	[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
+	{% endfor %}
+[/size][/center]
+
+
+
+{% for platoon in division.platoons %}
+[Center][size=4][color=#FF0000]{{ platoon.name }}[/Color][/size]																				{# States Platoon Name #}	
+	[size=3][color=#40E0D0]Platoon Leader[/color][/size]
+	{% if platoon.leader.handle.pivot.value %}																													{# Platoon Leader Section #}
+		[size=3][profile={{ platoon.leader.clan_id }}][color=#00FF00] {{ platoon.leader.present().rankName }}  [/color][/profile][/size] 	{# If no puts TBD #}		
+	{% else %} 																																{# Runs as an else if there is no platoon leader #}
+		[size=3][color=#40E0D0]TBA[/color][/size]
+    {% endif %}[/Center]
+
+[table='align:center,width: 1200']
+    {% for squad in platoon.squads %}																							
+{% if squad.name %}																															
+        	[tr][td][size=3][color=#FF0000]{{ squad.name }}[/Color]
+			[/size]																															{# Asks if the squad has a name, if not puts TBD #}
+{% else %}
+    		[tr][td][size=3]TBA[/size]
+{% endif %}
+            [size=3][color=#40E0D0]Squad Leader[/color][/size]
+		{% if squad.leader.handle.pivot.value %}																												{# Asks if there is a squad leader assigned, if yes puts in their rank and name #}
+			[size=3][profile={{ squad.leader.clan_id }}][color=#FFA500] {{ squad.leader.present().rankName }}  [/color][/profile][/size]  						           																					
+		{% else %}
+			[size=3][color=#FFA500] TBA [/color][/size] 
+		{% endif %}        
+[size=2][list]
+{% for member in squad.members %}
+            {% if member.recruiter_id == squad.leader.clan_id %}																			{# It does this by cycling through every member of the squad and asking if the members recruiter ID matchers #}
+                [*][profile={{ member.clan_id }}] {{ member.present().rankName }}[/profile][COLOR="#DDA0DD"]*[/COLOR]
+             {% endif %}
+         {% endfor %}
+[/size][/list][size=2][list]																												{# Begins iterating non-directly recruited squad members #}
+{% for member in squad.members %}
+            {% if member.recruiter_id != squad.leader.clan_id or member.recruiter_id == null %}												{# It does this in the same way as with direct recruits, except it asks #}
+                [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
+			{% endif %}
+		{% endfor %}
+[/size][/list]        
+        
+        
+        
+[/td]
+{% endfor %}
+[/tr]
+[/table]       
+        
+{% endfor %}
+
+{% if division.partTimeMembers.count() > 0 %}																										{# Asks if there are any part time members of the division #}
+[table='align:center,width: 800'][tr][td]
+	[center][size=3][color=#40E0D0][b]Part Time Members[/b][/color][/size][/center][/td][/tr][/table]
+[table='align:center,width: 600'][tr][td]
+{% for partTimer in division.partTimeMembers %}
+			[profile={{ partTimer.clan_id }}]{{ partTimer.present().rankName }}
+			[/profile]																																{# If yes, iterates through all part time members, putting rank and name #}
+				{% if loop.index is divisible by(10) %}																								{# Creates a new column for every 20 members #}
+				[/td][td]
+		{% endif %}
+	{% endfor %}
+	[/td][/tr]
+	[/table]
+    
+    [HR][/HR]
+{% endif %}
+
+{% set Recruits = 0 %}																																{# Defines each rank as a variable and assigns it a count of 0 before counting the rank #}
+{% set Cadets = 0 %}														
+{% set Privates = 0 %}																																
+{% set PrivatesFirst = 0 %}
+{% set Specialists = 0 %}
+{% set Officers = 0 %}
+
+{% for platoon in division.platoons %}
+	{% for squad in platoon.squads %}
+		{% for member in squad.members %}																											{# Goes through every member and asks if the members rank abbreviation matches what is in the string (such as Pvt) #}
+        	{% if  member.rank.abbreviation == "Rct" %}																								{# If it does then it adds 1 to the variable associated with that rank, thus counting it #}
+            	{% set Recruits = Recruits + 1 %}
+            {% endif %}
+            {% if  member.rank.abbreviation == "Cdt" %}
+            	{% set Cadets = Cadets + 1 %}
+            {% endif %}
+            {% if  member.rank.abbreviation == "Pvt" %}
+            	{% set Privates = Privates + 1 %}
+            {% endif %}
+            {% if  member.rank.abbreviation == "Pfc" %}
+            	{% set PrivatesFirst = PrivatesFirst + 1 %}
+            {% endif %}
+            {% if  member.rank.abbreviation == "Spec" %}
+            	{% set Specialists = Specialists + 1 %}
+            {% endif %}
+        {% endfor %}
+	{% endfor %}
+{% endfor %}
+{% set Officers = division.memberCount - Recruits - Cadets - Privates - PrivatesFirst - Specialists %}												{# Instead of counting low population ranks, calculates officers as being the total division members, takeaway all already accounted members #}
+
+[table='align:center,width: 800'][tr][td]																											{# Iterates all members with an LOA #}
+{% if (division.leave) %}																															
+	[center][size=3][color=#FF0000][b]Leaves of Absence[/b][/color][/size]
+	[size=2]
+	{% for member in division.leave %}
+		{% if member.leave.expired %}
+			[profile={{ member.clan_id }}] {{ member.present().rankName }}[/profile] - [color=red]{{ member.leave.date }} [EXPIRED][/color] - {{ member.leave.reason }}
+		{% else %}
+			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - {{ member.leave.date }} - {{ member.leave.reason }}
+		{% endif %}
+	{% endfor %}
+	[/size]
+	[/center]
+{% endif %}
+[/td][/tr]
+[/table]
+
+[CENTER][SIZE=4][color=#FF0000]Division Statistics[/SIZE][/CENTER][/COLOR]
+
+[CENTER][SIZE=3][COLOR="#40E0D0"]Recruits[/COLOR] - {{ Recruits }}																					{# States how many of each rank there are in the division #}
+[COLOR="#40E0D0"]
+Cadets[/COLOR] - {{ Cadets }}
+[COLOR="#40E0D0"]Privates[/COLOR] - {{ Privates }}
+[COLOR="#40E0D0"]Private First Class[/COLOR] - {{ PrivatesFirst }}
+[COLOR="#40E0D0"]Specialists[/COLOR] - {{ Specialists }}
+{# [COLOR="#40E0D0"]Officers[/COLOR] - {{ Officers }} #}
+
+
+[COLOR="#40E0D0"]Total Full Time Members[/COLOR] - {{ division.memberCount }}																		{# States how many members are in the division #}
+[COLOR="#40E0D0"]
+Total Part Time Members[/COLOR] - {{ division.partTimeMembers.count() }}[/SIZE][/CENTER]															{# States how many part time members are in the division #}
