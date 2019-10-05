@@ -11,10 +11,10 @@ To get started, review an existing division's structure template to give you an 
 Use the tracker editor to compile your template and review the generated bb-code
 `https://clanaod.net/v3tracker/divisions/<your-division-abbreviation>/structure/edit`
 
-Once you have a finished template, update your structure here: https://github.com/flashadvocate/aod-twig-templates
+Once you have a finished template, update your structure here: https://github.com/clanaod/aod-twig-templates
 
 ### Documentation
-https://clanaod.net/v3tracker/help/division-structures
+https://tracker.clanaod.net/help/division-structures
 
 ### Playground
 https://twigfiddle.com
