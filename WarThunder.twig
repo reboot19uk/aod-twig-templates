@@ -11,26 +11,22 @@
 {% endfor %}
 [/size]
 
-[size=3][color=#40E0D0]General Sergeants[/color]
-{# Iterate General Sergeants #}
-{#{% if division.generalSergeants %}
+[size=3][color="#FF0000"][b][i][u]General Sergeants[/u][/b][/i][/color]
 	{% for sergeant in division.generalSergeants %}
-		[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
+		[color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color]
+	{% else %}
+		No general Sergeants assigned
 	{% endfor %}
-{% else %}
-	No general sergeants assigned
-{% endif %}#}
-[profile=34445][color=#00FF00]Sgt WeDGE[/profile][/color]
+[/SIZE]
 ----------------------------------------------------------------------------------------------------------
-[/size]
 [/center]
 
 {% for platoon in division.platoons %}	
-	{% if loop.index == 1 %}
+	{#{% if loop.index == 1 %}
 		[center][size=6][color=red]1st Group[/color][/size]
 		
 		[size=4][color=#40E0D0]1st Group Commander[/color]
-		[profile=44573][color=#00FF00]Sgt Lt_FellaWhite[/profile][/color][/size][/center]
+		[profile=8162][color=#2E2EFE]SSgt Danneskjold[/profile][/color][/size][/center]
 	{% elseif loop.index == 2 %}		
 		[center][size=6][color=red]2nd Group[/color][/size]
 		
@@ -40,9 +36,9 @@
 		[center][size=6][color=red]3rd Group[/color][/size]
 		
 		[size=4][color=#40E0D0]3rd Group Commander[/color]
-		[profile=8162][color=#2E2EFE]SSgt Danneskjold[/color][/profile][/size][/center]
+		[profile=44573][color=#00FF00]Sgt Lt_FellaWhite[/color][/profile][/size][/center]
 	{% else %}
-	{% endif %}
+	{% endif %}#}
 	{% if platoon.logo %}
 		[center][img]{{ platoon.logo }}[/img][/center]
 	{% else %}
@@ -66,7 +62,7 @@
     [table='align:center, width: 850'][tr]
 	{% for squad in platoon.squads %}
     {# I also messed with this width #}
-		[td="width:20%"]
+		[td="width:25%"]
 		{% if squad.name %}
 			[size=2][color=ffff00]{{ squad.name }}[/color][/size]
 		{% else %}
