@@ -4,70 +4,70 @@
 
 [SIZE=5][COLOR="#ff6633"][B][U]Division Leadership[/U][/B][/COLOR][/SIZE]
 [SIZE=4]
-	{% for leader in division.leaders %}
-		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }} [url={{ leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
-	{% endfor %}
+{% for leader in division.leaders %}
+    [profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }} [url={{ leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
+{% endfor %}
 [/size]
 
 
 [size=3][color="#ff6633"]General Sergeants[/color]
-	{% for sergeant in division.generalSergeants %}
-		[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
-	{% else %}
-		No general Sergeants assigned
-	{% endfor %}
+{% for sergeant in division.generalSergeants %}
+    [profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile]
+{% else %}
+    No general Sergeants assigned
+{% endfor %}
 [/SIZE]
 [/center]
 
-{% for platoon in division.platoons %}	
-[table="align: center"]
-	[tr][td]
-	
-	[center][size=4][color=#ff6633]{{ platoon.name }}[/color][/center]
-	{% if platoon.leader %}
-    	[center][profile={{ platoon.leader.clan_id }}][color="#00FF00"]{{ platoon.leader.present().rankName }}[/color][/profile] 
-        {%- if platoon.leader.handle -%} 
-        	[url={{ platoon.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
-		{%- else -%}
-			XX
-		{%- endif -%}
+{% for platoon in division.platoons %}
+    [table="align: center"]
+    [tr][td]
+
+    [center][size=4][color=#ff6633]{{ platoon.name }}[/color][/center]
+    {% if platoon.leader %}
+        [center][profile={{ platoon.leader.clan_id }}][color="#00FF00"]{{ platoon.leader.present().rankName }}[/color][/profile]
+        {%- if platoon.leader.handle -%}
+            [url={{ platoon.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
+        {%- else -%}
+            XX
+        {%- endif -%}
         [/center]
-	{% else %}
-    	TBA
-   	{% endif %}
-    	[/size]
-	
-    
-	[/td][/tr]
-[/table]
-   
-[table="align: center"]
-[tr]
+    {% else %}
+        TBA
+    {% endif %}
+    [/size]
+
+
+    [/td][/tr]
+    [/table]
+
+    [table="align: center"]
+    [tr]
     {% for squad in platoon.squads %}
-    [td]
-    	[size=3][color=#ff6633]{{ squad.name }}[/color][/size]
-    	{% if squad.leader %}
-        	[size=3][profile={{ squad.leader.clan_id }}][color=white]{{ squad.leader.present().rankName }}[/color][/profile]
-            {%- if squad.leader.handle -%} 
-        		[url={{ squad.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
-			{%- else -%}
-				XX
-			{%- endif -%}
-		{% else %} 
-			{{ TBA }} 
-		{% endif %} 
-		[/size] 
-        [size=2][list=1] 
- 		{%- for member in squad.members -%} 
- 			[*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - {{ member.handle ? "[url=" ~ member.handle.full_url ~ "][color=#ff6633][BC][/color][/url]" : "XXX" }}
- 		{% endfor %} 
- 		[/list][/size] 
-	[/td]
-	{% if loop.index is divisible by (2) %}
-	[/tr][tr]
-	{% endif %}
-	{% endfor %} 
-	[/tr]
-	
-[/table]
+        [td]
+        [size=3][color=#ff6633]{{ squad.name }}[/color][/size]
+        {% if squad.leader %}
+            [size=3][profile={{ squad.leader.clan_id }}][color=white]{{ squad.leader.present().rankName }}[/color][/profile]
+            {%- if squad.leader.handle -%}
+                [url={{ squad.leader.handle.full_url }}] [color=#ff6633][BC][/color][/url]
+            {%- else -%}
+                XX
+            {%- endif -%}
+        {% else %}
+            {{ TBA }}
+        {% endif %}
+        [/size]
+        [size=2][list=1]
+        {%- for member in squad.members -%}
+            [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - {{ member.handle ? "[url=" ~ member.handle.full_url ~ "][color=#ff6633][BC][/color][/url]" : "XXX" }}
+        {% endfor %}
+        [/list][/size]
+        [/td]
+        {% if loop.index is divisible by (2) %}
+            [/tr][tr]
+        {% endif %}
+    {% endfor %}
+    [/tr]
+
+    [/table]
 {% endfor %}

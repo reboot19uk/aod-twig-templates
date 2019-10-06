@@ -4,106 +4,104 @@
 
 [SIZE=5][COLOR="#00FFFF"][B][U]Division Leadership[/U][/B][/COLOR][/SIZE]
 [SIZE=4]
-	{% for leader in division.leaders -%}
-		[profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }} [url={{ leader.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
-	{% endfor %}
+{% for leader in division.leaders -%}
+    [profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }} [url={{ leader.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
+{% endfor %}
 [/size]
 
 [size=3][color="#00FFFF"][b][u]General Sergeants[/u][/b][/color]
-	{% for sergeant in division.generalSergeants %}
-		[profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile] [url={{ sergeant.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
-	{% else %}
-		No general Sergeants assigned
-	{% endfor %}
+{% for sergeant in division.generalSergeants %}
+    [profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile] [url={{ sergeant.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
+{% else %}
+    No general Sergeants assigned
+{% endfor %}
 [/SIZE]
 [/center]
 
-{% for platoon in division.platoons %}	
-[table="align: center"]
-	[tr][td]
-	
-	[center][size=4][color=00FFFF]{{ platoon.name }}[/color][/center]
-	{% if platoon.leader %}
-    	[center][profile={{ platoon.leader.clan_id }}][color={{ platoon.leader.rank.color }}]{{ platoon.leader.present().rankName }}[/color][/profile] - 
-        {%- if platoon.leader.handle -%} 
-        	[url={{ platoon.leader.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
-		{%- else -%}
-			XX
-		{%- endif -%}
-        [/center]
-	{% else %}
-    	TBA
-   	{% endif %}
-    	[/size]
-	
-    
-	[/td][/tr]
-[/table]
-   
-[table="align: center"]
-[tr]
-    {% for squad in platoon.squads %}
-    [td]
-    	{% if squad.name %}
-        	[size=3][color=00FFFF]{{ squad.name }}[/color][/size]
-        {% else %}
-    		[size=3][color=00FFFF]Untitled[/color][/size]
-        {% endif %}
-    	{% if squad.leader %}
-        	[size=3][profile={{ squad.leader.clan_id }}][color={{ squad.leader.rank.color }}]{{ squad.leader.present().rankName }}[/color][/profile] - 
-            {%- if squad.leader.handle -%} 
-        		[url={{ squad.leader.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
-			{%- else -%}
-				XX
-			{%- endif -%}
-		{% else %} 
-			{{ TBA }} 
-		{% endif %} 
-		[/size] 
-        [size=2][list=1] 
- 		{%- for member in squad.members -%} 
- 			[*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] -
-            {%- if member.handle -%} 
-        	[url={{ member.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
-			{%- else -%}
-			XX
-			{%- endif -%}
- 		{% endfor %} 
- 		[/list][/size] 
-	[/td]
-	{% if loop.index is divisible by (3) %}
-	[/tr][tr]
-	{% endif %}
-	{% endfor %} 
-	[/tr]
-	
-[/table]
-{% endfor %}
+{% for platoon in division.platoons %}
+    [table="align: center"]
+    [tr][td]
 
+    [center][size=4][color=00FFFF]{{ platoon.name }}[/color][/center]
+    {% if platoon.leader %}
+        [center][profile={{ platoon.leader.clan_id }}][color={{ platoon.leader.rank.color }}]{{ platoon.leader.present().rankName }}[/color][/profile] -
+        {%- if platoon.leader.handle -%}
+            [url={{ platoon.leader.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
+        {%- else -%}
+            XX
+        {%- endif -%}
+        [/center]
+    {% else %}
+        TBA
+    {% endif %}
+    [/size]
+
+
+    [/td][/tr]
+    [/table]
+
+    [table="align: center"]
+    [tr]
+    {% for squad in platoon.squads %}
+        [td]
+        {% if squad.name %}
+            [size=3][color=00FFFF]{{ squad.name }}[/color][/size]
+        {% else %}
+            [size=3][color=00FFFF]Untitled[/color][/size]
+        {% endif %}
+        {% if squad.leader %}
+            [size=3][profile={{ squad.leader.clan_id }}][color={{ squad.leader.rank.color }}]{{ squad.leader.present().rankName }}[/color][/profile] -
+            {%- if squad.leader.handle -%}
+                [url={{ squad.leader.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
+            {%- else -%}
+                XX
+            {%- endif -%}
+        {% else %}
+            {{ TBA }}
+        {% endif %}
+        [/size]
+        [size=2][list=1]
+        {%- for member in squad.members -%}
+            [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] -
+            {%- if member.handle -%}
+                [url={{ member.handle.full_url }}] [color=00FFFF][Steam][/color][/url]
+            {%- else -%}
+                XX
+            {%- endif -%}
+        {% endfor %}
+        [/list][/size]
+        [/td]
+        {% if loop.index is divisible by (3) %}
+            [/tr][tr]
+        {% endif %}
+    {% endfor %}
+    [/tr]
+
+    [/table]
+{% endfor %}
 
 
 [SIZE=4][CENTER][COLOR="#40E0D0"]Part Time[/COLOR][/CENTER][/SIZE]
 
 [SPOILER][CENTER]
 {%- for member in division.partTimeMembers %}
-	[profile={{ member.clan_id }}]AOD_{{ member.name }}[/profile] - {{ member.handle ? "[url=" ~ member.handle.full_url ~ "][color=00FFFF][Steam][/color][/url]" : "XXXX" }}
+    [profile={{ member.clan_id }}]AOD_{{ member.name }}[/profile] - {{ member.handle ? "[url=" ~ member.handle.full_url ~ "][color=00FFFF][Steam][/color][/url]" : "XXXX" }}
 {% endfor %}
 [/CENTER][/SPOILER]
 
 
-
 {% if division.leave %}
-[center][size=3][color=#40E0D0][b]Leave of Absences[/b][/color][/size][/center]
+    [center][size=3][color=#40E0D0][b]Leave of Absences[/b][/color][/size][/center]
 
-	[spoiler][center]
-	{% for member in division.leave %}
-		{% if member.leave.expired %}
-			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - [color=red]{{ member.leave.date }} (EXPIRED)[/color] - {{ member.leave.reason }}
-		{% else %}
-			[profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - {{ member.leave.date }} - {{ member.leave.reason }}
-		{% endif %}
-	{% endfor %}
-	[/center][/spoiler]
+    [spoiler][center]
+    {% for member in division.leave %}
+        {% if member.leave.expired %}
+            [profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - [color=red]{{ member.leave.date }} (EXPIRED)[/color] - {{ member.leave.reason }}
+        {% else %}
+            [profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile] - {{ member.leave.date }} - {{ member.leave.reason }}
+        {% endif %}
+    {% endfor %}
+    [/center][/spoiler]
 {% endif %}
 
 [CENTER]
