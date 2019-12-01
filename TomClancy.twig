@@ -1,168 +1,342 @@
-[table='align:center,width: 800'][tr][td][center][img]http://i.imgur.com/FUVJar0.jpg[/img]
+[table='align:center,width:1000'][tr][td][center][img]https://i.imgur.com/it9sSUH.png?2[/img]
 
-[size=5][color=#FF0000][b][i][u]Division Leaders[/u][/i][/b][/color]
+[size=4][color="#DAA520"][b][u]DIVISION LEADERS[/u][/b][/color]
 
-{# iterate leaders #}
-{% for leader in division.leaders -%}
-    [profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }}
-{% else %}
-    TBA
+{# Iterate Leaders #}
+{% for leader in division.leaders %}
+  [profile={{ leader.clan_id }}][color={{ leader.rank.color }}]{{ leader.present().rankName }}[/color][/profile] - {{ leader.position.name }}
 {% endfor %}
 {# Iterate General Sergeants #}
 {% if division.generalSergeants %}
-    {% for sergeant in division.generalSergeants %}
-        [profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile] - General Sergeant
-    {% endfor %}
+  {% for sergeant in division.generalSergeants %}
+    [profile={{ sergeant.clan_id }}][color={{ sergeant.rank.color }}]{{ sergeant.present().rankName }}[/color][/profile] - General Sergeant
+  {% endfor %}
 {% endif %}
 [/size]
 
-[size=3][color="#40E0D0"]Corporals[/color]
+[table="align: center, width:1000"][tr]
+[td][size=2][color="#FF8C00"][size=3]Corporals[/size][/color]
 
 {% for platoon in division.platoons %}
-	{%- if platoon.leader -%}
-        {%- if platoon.leader.rank.name == 'Corporal' %}
-            [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
-        {% endif %}
-    {% endif -%}
-    {%- for squad in platoon.squads %}
-        {% if squad.leader.rank.name == 'Corporal' %}
-            [profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
-        {% endif -%}
-        {%- for member in squad.members %}
-            {% if member.rank.name == 'Corporal' %}
-                [profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
-            {% endif -%}
-        {% endfor -%}
-    {% endfor -%}
-{%- endfor -%}[/size]
+  {% if platoon.leader %}
+    {% if platoon.leader.rank.name == 'Corporal' %}
+      [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
+    {% endif %}
+  {% endif %}
+  {% for squad in platoon.squads %}
+    {% if squad.leader.rank.name == 'Corporal' %}
+      [profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
+    {% endif %}
+    {% for member in squad.members %}
+      {% if member.rank.name == 'Corporal' %}
+        [profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}[/size][/td]
 
-[size=3][color="#40E0D0"]Lance Corporals[/color]
-
-{% for platoon in division.platoons %}
-	{%- if platoon.leader -%}
-        {%- if platoon.leader.rank.name == 'Lance Corporal' %}
-            [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
-        {% endif %}
-    {% endif -%}
-    {%- for squad in platoon.squads %}
-        {% if squad.leader.rank.name == 'Lance Corporal' %}
-            [profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
-        {% endif -%}
-        {%- for member in squad.members %}
-            {% if member.rank.name == 'Lance Corporal' %}
-                [profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
-            {% endif -%}
-        {% endfor -%}
-    {% endfor -%}
-{%- endfor -%}[/size]
-
-[size=3][color="#40E0D0"]Trainers[/color]
+[td][size=2][color="#FF8C00"][size=3]Lance Corporals[/size][/color]
 
 {% for platoon in division.platoons %}
-	{%- if platoon.leader -%}
-        {%- if platoon.leader.rank.name == 'Trainer' %}
-            [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
-        {% endif %}
-    {% endif -%}
-    {%- for squad in platoon.squads %}
-        {% if squad.leader.rank.name == 'Trainer' %}
-            [profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
-        {% endif -%}
-        {%- for member in squad.members %}
-            {% if member.rank.name == 'Trainer' %}
-                [profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
-            {% endif -%}
-        {% endfor -%}
-    {% endfor -%}
-{%- endfor -%}[/size]
+  {% if platoon.leader %}
+    {% if platoon.leader.rank.name == 'Lance Corporal' %}
+      [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
+    {% endif %}
+  {% endif %}
+  {% for squad in platoon.squads %}
+    {% if squad.leader.rank.name == 'Lance Corporal' %}
+      [profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
+    {% endif %}
+    {% for member in squad.members %}
+      {% if member.rank.name == 'Lance Corporal' %}
+      [profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
+      {% endif -%}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}[/size][/td]
 
-[size=3][color="#40E0D0"]Specialists[/color]
+[td][size=2][color="#FF8C00"][size=3]Trainers[/size][/color]
 
 {% for platoon in division.platoons %}
-	{%- if platoon.leader -%}
-        {%- if platoon.leader.rank.name == 'Specialist' %}
-            [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
-        {% endif %}
-    {% endif -%}
-    {%- for squad in platoon.squads %}
-        {% if squad.leader.rank.name == 'Specialist' %}
-            [profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
-        {% endif -%}
-        {%- for member in squad.members %}
-            {% if member.rank.name == 'Specialist' %}
-                [profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
-            {% endif -%}
-        {% endfor -%}
-    {% endfor -%}
-{%- endfor -%}[/size]
+  {% if platoon.leader %}
+    {% if platoon.leader.rank.name == 'Trainer' %}
+      [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.rank.abbreviation }}_{{ platoon.leader.name }}[/profile]
+    {% endif %}
+  {% endif %}
+  {% for squad in platoon.squads %}
+    {% if squad.leader.rank.name == 'Trainer' %}
+      [profile={{ squad.leader.clan_id }}]{{ squad.leader.rank.abbreviation }}_{{ squad.leader.name }}[/profile]
+    {% endif %}
+    {% for member in squad.members %}
+      {% if member.rank.name == 'Trainer' %}
+      [profile={{ member.handle.clan_id }}]{{ member.rank.abbreviation }}_{{ member.name }}[/profile]
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}[/size][/td]
+[/tr][/table]
+
 [/center][/td][/tr][/table]
-
-
+[hr][/hr]
 [center]
+[size=4][color="#FF0000"][u]JOINING THE TOM CLANCY DIVISION[/u][/color][/size]
+[size=3][color="#FFFFFF"]Full-Time TRANSFER | Part-Time JOINING | PROMOTIONS[/color][/size]
+[/center]
+[color="#FFFFFF"][size=2]
+[table='align:center, width:1000'][tr]
+[td][color="#FF8C00"][size=3]FULL TIME[/size][/color]
+
+Please add:
+Full-time
+Name
+Uplay: [Your Uplay name] *
+Main TC game
+Region (EU/NA/AS)
+[/td]
+[td][color="#FF8C00"][size=3]PART-TIME[/size][/color]
+
+Please add:
+Part-time
+Name
+Uplay: [Your Uplay name] *
+[/td]
+[td][color="#FF8C00"][size=3]EXAMPLE[/size][/color]
+
+Please add:
+Full-time
+Ithil
+Uplay: AOD_Ithil
+R6S
+EU
+[/td]
+[td][color="#FF8C00"][size=3]PROMOTION[/size][/color]
+
+AOD_(YOUR NAME)
+Old Rank >> New Rank
+AOD_(OFFICER NAME)
+[/td]
+[td][color="#FF8C00"][size=3]EXAMPLE[/size][/color]
+
+AOD_WizardFIN
+Rct >> Cdt
+AOD_sNaKe
+[/td]
+[/tr][/table]
+[/size][/color]
+
+[hr][/hr]
+[center]
+[table="align: center"][tr]
+
+{# Iterate Rainbow Six Siege Platoons #}
 {% for platoon in division.platoons %}
+  {% if '[R]' in platoon.name %}
+    [td]
     {% if platoon.logo %}
-        [center][img]{{ platoon.logo }}[/img][/center]
-    {% else %}
-
+      [center][img]{{ platoon.logo }}[/img][/center]
     {% endif %}
 
-    [center][size=4][color="#40E0D0"]Platoon Leader[/color]
-    {% if platoon.leader %}
-        [profile={{ platoon.leader.clan_id }}]{{ platoon.leader.present().rankName }}[/profile]
+    [center][size=3][color="#DAA520"]Platoon Leader[/color][/size]
+    [size=4]{% if platoon.leader and platoon.leader.name %}
+      [profile={{ platoon.leader.clan_id }}][color="#FF8C00"]{{ platoon.leader.present().rankName }}[/color][/profile]
     {% else %}
-        TBA
+      [color="#FFDD99"]TBA[/color]
     {% endif %}
-    [/center][/size]
+    [/size][/center]
 
     [table="align: center"][tr]
     {% for squad in platoon.squads %}
-        [td]
-        [size=4][color="#40E0D0"]{{ ordSuffix(loop.index) }} Squad Leader[/color]
-        {% if squad.leader %}
-            [profile={{ squad.leader.clan_id }}]{{ squad.leader.present().rankName }}[/profile]
-        {% else %}
-            TBA
-        {% endif %}
-        [/size]
-        [size=2][left][list]
-        {% for member in squad.members %}
-            [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
-        {% endfor %}
-        [/list][/left][/size]
-        [/td]
+      [td]
+      [size=2][color="#FFDD99"]
+      {% if squad.name %}
+        {{ squad.name }}
+      {% else %}
+        Untitled
+      {% endif %}
+      [/color][/size]
+      [size=3]{% if squad.leader and squad.leader.name %}
+        [profile={{ squad.leader.clan_id }}][color="#FF8C00"]{{ squad.leader.present().rankName }}[/color][/profile]
+      {% else %}
+        [color="#FFDD99"]TBA[/color]
+      {% endif %}[/size]
+{{ squad.logo }}
+[HR][/HR]
+      [size=1][left][list]
+      {% for member in squad.members %}
+        [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
+      {% endfor %}
+      [/list][/left][/size]
+      [/td]
     {% endfor %}
-
     [/tr][/table]
+    [/td]
+  {% endif %}
 {% endfor %}
+[/tr]
+[tr]
+{# Iterate The Division Platoons #}
+{% for platoon in division.platoons %}
+  {% if '[D]' in platoon.name %}
+    [td]
+    {% if platoon.logo %}
+      [center][img]{{ platoon.logo }}[/img][/center]
+    {% endif %}
+
+    [center][size=3][color="#DAA520"]Platoon Leader[/color][/size]
+    [size=4]{% if platoon.leader and platoon.leader.name %}
+      [profile={{ platoon.leader.clan_id }}][color="#FF8C00"]{{ platoon.leader.present().rankName }}[/color][/profile]
+    {% else %}
+      [color="#FFDD99"]TBA[/color]
+    {% endif %}
+    [/size][/center]
+
+    [table="align: center"][tr]
+    {% for squad in platoon.squads %}
+      [td]
+      [size=2][color="#FFDD99"]
+      {% if squad.name %}
+        {{ squad.name }}
+      {% else %}
+        Untitled
+      {% endif %}
+      [/color][/size]
+      [size=3]{% if squad.leader and squad.leader.name %}
+        [profile={{ squad.leader.clan_id }}][color="#FF8C00"]{{ squad.leader.present().rankName }}[/color][/profile]
+      {% else %}
+        [color="#FFDD99"]TBA[/color]
+      {% endif %}[/size]
+{{ squad.logo }}
+[HR][/HR]
+      [size=1][left][list]
+      {% for member in squad.members %}
+        [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
+      {% endfor %}
+      [/list][/left][/size]
+      [/td]
+    {% endfor %}
+    [/tr][/table]
+    [/td]
+  {% endif %}
+{% endfor %}
+[/tr][/table]
+{# Iterate Ghost Recon Platoons #}
+{% for platoon in division.platoons %}
+  {% if '[G]' in platoon.name %}
+    
+    {% if platoon.logo %}
+      [center][img]{{ platoon.logo }}[/img][/center]
+    {% endif %}
+
+    [center][size=3][color="#DAA520"]Platoon Leader[/color][/size]
+    [size=4]{% if platoon.leader and platoon.leader.name %}
+      [profile={{ platoon.leader.clan_id }}][color="#FF8C00"]{{ platoon.leader.present().rankName }}[/color][/profile]
+    {% else %}
+      [color="#FFDD99"]TBA[/color]
+    {% endif %}
+    [/size][/center]
+
+    [table="align: center"][tr]
+    {% for squad in platoon.squads %}
+      [td]
+      [size=2][color="#FFDD99"]
+      {% if squad.name %}
+        {{ squad.name }}
+      {% else %}
+        Untitled
+      {% endif %}
+      [/color][/size]
+        [size=3]{% if squad.leader and squad.leader.name %}
+        [profile={{ squad.leader.clan_id }}][color="#FF8C00"]{{ squad.leader.present().rankName }}[/color][/profile]
+      {% else %}
+        [color="#FFDD99"]TBA[/color]
+      {% endif %}[/size]
+{{ squad.logo }}
+[HR][/HR]
+      [size=1][left][list]
+      {% for member in squad.members %}
+        [*][profile={{ member.clan_id }}]{{ member.present().rankName }}[/profile]
+      {% endfor %}
+      [/list][/left][/size]
+      [/td]
+    {% endfor %}
+    [/tr][/table]
+
+  {% endif %}
+{% endfor %}
+
 [/center]
 
-[center]-----------------------------------------------------------[/center]
+[hr][/hr]
 
-[table='align:center,width: 800'][tr][td]
-[center][size=3][color=#40E0D0][b]Part Time Members[/b][/color][/size][/center][/td][/tr][/table]
+[center][size=3][color="#FF0000"][b]Part Time Members[/b][/color][/size][/center]
 
-{% set max_PartTime = 20 %}
 [table='align:center'][tr][td]
-{%- for member in division.partTimeMembers %}
-    [profile={{ member.clan_id }}]AOD_{{ member.name }}[/profile]
-    {%- if loop.index == max_PartTime %}
-        [/td][td]
-    {% endif %}
+{% for member in division.partTimeMembers %}
+  [size=1][profile={{ member.clan_id }}]AOD_{{ member.name }}[/profile][/size]
+  {% if loop.index is divisible by(20) %}
+    [/td][td]
+  {% endif %}
 {% endfor %}
 [/td][/tr][/table]
 
-[center]-----------------------------------------------------------[/center]
+[hr][/hr]
 
 {% if division.leave %}
-    [center][size=3][color=#40E0D0][b]Leave of Absences[/b][/color][/size][/center]
-
-    [center]
-    {% for member in division.leave %}
-        {% if member.leave.expired %}
-            {{ member.present().rankName }} - [color=red]{{ member.leave.date }} (EXPIRED)[/color] - {{ member.leave.reason }}
-        {% else %}
-            {{ member.present().rankName }} - {{ member.leave.date }} - {{ member.leave.reason }}
-        {% endif %}
-    {% endfor %}
-    [/center]
+  [center][size=3][color="#FF0000"][b]Leave of Absences[/b][/color][/size][/center]
+  [center][size=2][color="#FFFFFF"]
+  {% for member in division.leave %}
+    {% if member.leave.expired %}
+      {{ member.present().rankName }} - [color="FF0000"]{{ member.leave.date }} (EXPIRED)[/color] - {{ member.leave.reason }}
+    {% else %}
+      {{ member.present().rankName }} - {{ member.leave.date }} - {{ member.leave.reason }}
+    {% endif %}
+  {% endfor %}[/size][/color]
+  [/center]
 {% endif %}
+
+{# Defines each rank as a variable and assigns it a count of 0 before counting the rank #}
+{% set Recruits = 0 %}
+{% set Cadets = 0 %}
+{% set Privates = 0 %}
+{% set PrivatesFirst = 0 %}
+{% set Specialists = 0 %}
+{% set Officers = 0 %}
+
+{# Goes through every member and asks if the members rank abbreviation matches what is in the string (such as Pvt) #}
+{# If it does then it adds 1 to the variable associated with that rank, thus counting it #}
+{% for platoon in division.platoons %}
+  {% for squad in platoon.squads %}
+    {% for member in squad.members %}
+      {% if member.rank.abbreviation == "Rct" %}
+        {% set Recruits = Recruits + 1 %}
+      {% elseif member.rank.abbreviation == "Cdt" %}
+        {% set Cadets = Cadets + 1 %}
+      {% elseif member.rank.abbreviation == "Pvt" %}
+        {% set Privates = Privates + 1 %}
+      {% elseif member.rank.abbreviation == "Pfc" %}
+        {% set PrivatesFirst = PrivatesFirst + 1 %}
+      {% elseif member.rank.abbreviation == "Spec" %}
+        {% set Specialists = Specialists + 1 %}
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+{# Instead of counting low population ranks, calculates officers as being the total division members, takeaway all already accounted members #}
+{% set Officers = division.memberCount - Recruits - Cadets - Privates - PrivatesFirst - Specialists %}
+
+[hr][/hr]
+
+{# States how many of each rank there are in the division #}
+[center][size=3][color="#FF0000"]Division Statistics[/color][/size][/center]
+[center][size=2][color="#FFFFFF"]
+[color="#FFDD99"]Recruits[/color] - {{ Recruits }}
+[color="#FFDD99"]Cadets[/color] - {{ Cadets }}
+[color="#FFDD99"]Privates[/color] - {{ Privates }}
+[color="#FFDD99"]Private First Class[/color] - {{ PrivatesFirst }}
+[color="#FFDD99"]Specialists[/color] - {{ Specialists }}
+[color="#FF8C00"]Officers[/color] - {{ Officers }}
+
+{# States how many members are in the division #}
+[size=4][color="#FF8C00"]Total Full Time Members[/color] - {{ division.memberCount }}
+[color="#FF8C00"]Total Part Time Members[/color] - {{ division.partTimeMembers.count() }}[/size]
+[/color][/size][/center]
