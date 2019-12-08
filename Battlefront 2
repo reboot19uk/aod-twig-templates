@@ -34,7 +34,7 @@
 		[color=40E0D0]{{ TBA }}[/color]
 	{% endif %}
 	{# iterate squad #}
-    {% for squad in platoon.squads %}
+    {% for squad in platoon.squads %} 
 
 [size=4]{{ squad.name }}[/size]
 
